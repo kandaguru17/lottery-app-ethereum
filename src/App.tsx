@@ -45,7 +45,11 @@ function App() {
   }, [state.message]);
 
   const renderPlayers = () => {
-    return state.players.map((it) => <li>{it}</li>);
+    return state.players.map((it) => (
+      <li>
+        <em>{it}</em>
+      </li>
+    ));
   };
 
   const onInputChange = (e: any) => {
@@ -95,39 +99,54 @@ function App() {
 
   return (
     <>
-      <div className='App'>
-        <h1>Lottery Contract</h1>
-        <h3>Contract is managed by : {state.manager} </h3>
-        <h3>Number of players participating : {state.players.length} </h3>
-        <h3>Players in the lottery:</h3>
-        <ul>{renderPlayers()}</ul>
+      <div className='container'>
+        <h1 className='text-center pb-5'>LOTTERY CONTRACT</h1>
+        <h3 className='text-center pb-5'>
+          CONTRACT MANAGED BY : <em>{state.manager}</em>
+        </h3>
 
-        <h3>Money in the Wallet:</h3>
-        <h2>{web3.utils.fromWei(state.balance, 'ether')} Ether</h2>
+        <div className='row offset-1'>
+          <div className='col-6'>
+            <h3 className='pb-3'>
+              Number of players participating : {state.players.length}{' '}
+            </h3>
+            <h3>Players in the lottery:</h3>
+            <ul>{renderPlayers()}</ul>
+          </div>
 
-        <hr />
-
-        <form onSubmit={enrollPlayer}>
-          <h3>Try your Luck Yo!</h3>
-          <input
-            type='number'
-            name='value'
-            value={state.value}
-            onChange={(e) => onInputChange(e)}
-          />
-          <button type='submit'>Enter</button>
-        </form>
-
-        <hr />
-
-        <>
+          <div className='col-6'>
+            <h3 className='pb-3'>
+              Money in the Wallet:{' '}
+              {` ${web3.utils.fromWei(state.balance, 'ether')} Ether`}
+            </h3>
+            <form onSubmit={enrollPlayer}>
+              <h3>Try your Luck Yo!</h3>
+              <div className='form-group row mx-auto '>
+                <input
+                  type='number'
+                  name='value'
+                  placeholder='Amount in Ethers'
+                  value={state.value}
+                  onChange={(e) => onInputChange(e)}
+                  className=' col-6 form-control mr-2'
+                />
+                <button type='submit' className='btn btn-primary'>
+                  Enter
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className='col-12 text-center pt-5'>
           <h3>Pick a random Winner</h3>
-          <button type='button' onClick={chooseWinner}>
+          <button
+            className='btn btn-success'
+            type='button'
+            onClick={chooseWinner}
+          >
             Choose
           </button>
-        </>
-
-        <hr />
+        </div>
 
         <h2>{state.message}</h2>
       </div>

@@ -86,5 +86,5 @@ const abi: AbiItem[] = [
 
 const contractAddress = '0xcd1E7Ff26950867ece1701E0C49d5E26b9539E92';
 
-// creating a local proxy of the contract deployed on rinkeby test network for use within application
+// creating a proxy of the contract deployed on rinkeby test network for use within application
 export default new web3.eth.Contract(abi, contractAddress);
