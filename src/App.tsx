@@ -97,6 +97,28 @@ function App() {
     }
   };
 
+  const renderMessage = () => {
+    const className = 'alert alert-info alert-dismissible';
+    return state.message === '' ? (
+      ''
+    ) : (
+      <div className={`${className} p-3 mt-3`} role='alert'>
+        {state.message}
+        <button
+          type='button'
+          className='close'
+          data-dismiss='alert'
+          aria-label='Close'
+          onClick={() => {
+            setstate((prevState) => ({ ...prevState, message: '' }));
+          }}
+        >
+          <span aria-hidden='true'>&times;</span>
+        </button>
+      </div>
+    );
+  };
+
   return (
     <>
       <div className='container'>
@@ -148,7 +170,7 @@ function App() {
           </button>
         </div>
 
-        <h2>{state.message}</h2>
+        {renderMessage()}
       </div>
     </>
   );
